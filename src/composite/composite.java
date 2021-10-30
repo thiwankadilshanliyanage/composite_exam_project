@@ -5,6 +5,9 @@
  */
 package composite;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author Thiwanka
@@ -47,6 +50,13 @@ public class composite extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTree1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Document");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Create New File", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -123,6 +133,11 @@ public class composite extends javax.swing.JFrame {
         create_folder.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         create_folder.setContentAreaFilled(false);
         create_folder.setOpaque(true);
+        create_folder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_folderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -216,6 +231,26 @@ public class composite extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void create_folderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_folderActionPerformed
+       
+         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
+         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(folder_name.getText());
+         selectedNode.add(newNode);
+         
+         // reload jtree model
+          DefaultTreeModel model = (DefaultTreeModel)jTree1.getModel();
+          model.reload();
+        
+    }//GEN-LAST:event_create_folderActionPerformed
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+        
+         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
+            folder_name.setText(selectedNode.getUserObject().toString());
+            
+        
+    }//GEN-LAST:event_jTree1MouseClicked
 
     /**
      * @param args the command line arguments
