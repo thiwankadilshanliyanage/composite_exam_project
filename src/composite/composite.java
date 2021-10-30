@@ -82,6 +82,11 @@ public class composite extends javax.swing.JFrame {
         create_file.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         create_file.setContentAreaFilled(false);
         create_file.setOpaque(true);
+        create_file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_fileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,13 +239,7 @@ public class composite extends javax.swing.JFrame {
 
     private void create_folderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_folderActionPerformed
        
-         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
-         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(folder_name.getText());
-         selectedNode.add(newNode);
-         
-         // reload jtree model
-          DefaultTreeModel model = (DefaultTreeModel)jTree1.getModel();
-          model.reload();
+        
         
     }//GEN-LAST:event_create_folderActionPerformed
 
@@ -251,6 +250,21 @@ public class composite extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_jTree1MouseClicked
+
+    private void create_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_fileActionPerformed
+        
+         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
+         DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(file_name.getText());
+         selectedNode.add(newNode);
+         
+         // reload jtree model
+          DefaultTreeModel model = (DefaultTreeModel)jTree1.getModel();
+          String fileSize = file_size.getText();
+          String fileSizeType = size_selector.getSelectedItem().toString();
+          file_name.setText(" ");
+          model.reload();
+          
+    }//GEN-LAST:event_create_fileActionPerformed
 
     /**
      * @param args the command line arguments
